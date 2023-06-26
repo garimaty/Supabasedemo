@@ -13,27 +13,23 @@ RxBool isLoading = false.obs;
 
 final SupabaseServices _services= SupabaseServices();
 
-final formKey = GlobalKey<FormState>().obs;
+final registerFormKey = GlobalKey<FormState>().obs;
 
  register() async{
-
+   try{
      isLoading(true);
      var user= await _services.createUser(emailController.text, passwordController.text);
-     if(user.data != null){
-       Get.snackbar(
-         "Congrats!!",
-         "You Successfully Registered and please check your mail for confirmation"
-       );
-     }else if(user.error?.message != null){
-       Get.snackbar(
-           "Fail!!",
-           user.error!.message.toString()
-       );
-     }
-    print(user);
-
+     Get.snackbar("Congrats!!","Successfully Registered");
+   } on AuthException catch (e){
+     Get.snackbar(
+         "Fail!!",
+         e.message
+     );
    }
-
+   // catch(e){
+   //   throw Exception(e);
+   // }
+ }
 
  @override
  void onInit() {
@@ -49,6 +45,7 @@ final formKey = GlobalKey<FormState>().obs;
   void dispose() {
     // TODO: implement dispose
     super.dispose();
+    registerFormKey.value.currentState!.dispose();
     emailController.dispose();
     usernameController.dispose();
     passwordController.dispose();

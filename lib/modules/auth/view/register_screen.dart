@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:supabase_demo/modules/auth/controller/registerController.dart';
+import 'package:supabase_demo/modules/auth/controller/register_controller.dart';
+import 'package:supabase_demo/route/route_class.dart';
 
 
 class RegisterScreen extends GetView<RegisterController> {
@@ -13,9 +14,9 @@ class RegisterScreen extends GetView<RegisterController> {
 
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.all(15),
+        padding: const EdgeInsets.all(12),
         child: Form(
-          key: controller.formKey.value,
+          key: controller.registerFormKey.value,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -76,7 +77,7 @@ class RegisterScreen extends GetView<RegisterController> {
               ),
 
               ElevatedButton(onPressed: (){
-                if(controller.formKey.value.currentState!.validate()){
+                if(controller.registerFormKey.value.currentState!.validate()){
                       controller.register();
                 }
               }, child:
@@ -90,8 +91,8 @@ class RegisterScreen extends GetView<RegisterController> {
                     children:  [
                       const Text("If you have account then"),
                       GestureDetector(
-                        onTap: (){
-
+                        onTap: () async {
+                         await  Get.toNamed(RouteClass.loginScreen);
                         },
                         child: const Text("CLICK HERE",
                           style: TextStyle(

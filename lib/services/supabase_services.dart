@@ -6,14 +6,21 @@ class SupabaseServices{
   final supabase = Supabase.instance.client;
 
   createUser(email,password) async {
-    try{
+
       final AuthResponse res = await supabase.auth.signUp(
           email: email,
           password: password
       );
-    }catch(e){
-      throw Exception(e);
-    }
+      return res;
+
+  }
+
+  signInUser(email,password) async {
+    final AuthResponse res = await supabase.auth.signInWithPassword(
+      email: email,
+      password: password
+    );
+    return res;
   }
 
 }

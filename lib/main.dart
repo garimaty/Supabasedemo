@@ -5,7 +5,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 
 import 'modules/auth/view/register_screen.dart';
-import 'route_class.dart';
+import 'route/route_class.dart';
 
 
 Future<void> main() async {
@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
       initialBinding: AuthBinding(),
       initialRoute: RouteClass.registerScreen,
       home: const RegisterScreen(),
+      getPages: RouteClass.routes,
     );
   }
 }
