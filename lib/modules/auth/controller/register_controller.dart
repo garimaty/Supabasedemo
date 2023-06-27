@@ -13,7 +13,7 @@ RxBool isLoading = false.obs;
 
 final SupabaseServices _services= SupabaseServices();
 
-final registerFormKey = GlobalKey<FormState>().obs;
+//GlobalKey<FormState> registerFormKey = GlobalKey<FormState>(debugLabel: '_registerFormKey');
 
  register() async{
    try{
@@ -34,20 +34,19 @@ final registerFormKey = GlobalKey<FormState>().obs;
  @override
  void onInit() {
     // TODO: implement onInit
-    super.onInit();
+
     usernameController = TextEditingController();
     emailController = TextEditingController();
     passwordController = TextEditingController();
-
+    super.onInit();
   }
 
  @override
   void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    registerFormKey.value.currentState!.dispose();
+
     emailController.dispose();
     usernameController.dispose();
     passwordController.dispose();
+    super.dispose();
   }
 }

@@ -23,4 +23,24 @@ class SupabaseServices{
     return res;
   }
 
+  //insert data into database
+  insertData(id,name,phnNo,fName,add) async{
+    final User? user = supabase.auth.currentUser;
+    await supabase.from("students").insert(
+      {
+        'id':id,
+         'name':name,
+        'Phone_number':phnNo,
+        "Father's_Name": fName,
+        'Address': add,
+        'teacherUid': user?.id,
+      }
+    );
+  }
+
+  fetchStudentList() async{
+   var data= await supabase.from('students').select('*');
+   return data;
+  }
+
 }

@@ -11,13 +11,13 @@ class LoginScreen extends GetView<LoginController> {
 
   @override
   Widget build(BuildContext context) {
-
+   final formKey= GlobalKey<FormState>();
     return SafeArea(
       child: Scaffold(
         body: Container(
           padding: const EdgeInsets.all(10),
           child: Form(
-            key: controller.formKey.value,
+            key: formKey,
              child: Padding(
                padding: const EdgeInsets.only(bottom: 20),
                child: Column(
@@ -60,7 +60,7 @@ class LoginScreen extends GetView<LoginController> {
                    ),
 
                    ElevatedButton(onPressed: (){
-                     if(controller.formKey.value.currentState!.validate()){
+                     if(formKey.currentState!.validate()){
                        controller.login();
                      }
                    }, child:
@@ -75,7 +75,7 @@ class LoginScreen extends GetView<LoginController> {
                            const Text("If you not have account then create one.."),
                            GestureDetector(
                              onTap: (){
-
+          Get.toNamed(RouteClass.loginScreen);
                              },
                              child: const Text("CLICK HERE",
                                style: TextStyle(

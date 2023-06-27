@@ -11,12 +11,14 @@ class RegisterScreen extends GetView<RegisterController> {
 
   @override
   Widget build(BuildContext context) {
+    final formKey= GlobalKey<FormState>();
+    return
+      Scaffold(
 
-    return Scaffold(
       body: Container(
         padding: const EdgeInsets.all(12),
         child: Form(
-          key: controller.registerFormKey.value,
+          key:formKey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -77,7 +79,7 @@ class RegisterScreen extends GetView<RegisterController> {
               ),
 
               ElevatedButton(onPressed: (){
-                if(controller.registerFormKey.value.currentState!.validate()){
+                if(formKey.currentState!.validate()){
                       controller.register();
                 }
               }, child:
@@ -92,6 +94,7 @@ class RegisterScreen extends GetView<RegisterController> {
                       const Text("If you have account then"),
                       GestureDetector(
                         onTap: () async {
+
                          await  Get.toNamed(RouteClass.loginScreen);
                         },
                         child: const Text("CLICK HERE",
@@ -109,6 +112,6 @@ class RegisterScreen extends GetView<RegisterController> {
           ),
         ),
       ),
-    );;
+    );
   }
 }

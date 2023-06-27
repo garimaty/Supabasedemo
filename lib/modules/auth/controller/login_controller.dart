@@ -10,11 +10,11 @@ import '../../../route/route_class.dart';
 class LoginController extends GetxController{
 
   final SupabaseServices _services= SupabaseServices();
-  final formKey = GlobalKey<FormState>().obs;
+//  GlobalKey<FormState> formKey = GlobalKey<FormState>(debugLabel: '_loginFormKey');
 
   late TextEditingController emailController;
   late TextEditingController passwordController;
-
+   final RxString uid= ''.obs;
 
   login() async{
   try{
@@ -22,6 +22,7 @@ class LoginController extends GetxController{
         emailController.text,
         passwordController.text
     ).then((value){
+
       Get.snackbar("Congrats!!",
           "Successfully Login"
       );
@@ -37,18 +38,17 @@ class LoginController extends GetxController{
 
   @override
   void onInit() {
-    // TODO: implement onInit
-    super.onInit();
+
     emailController = TextEditingController();
     passwordController = TextEditingController();
+    super.onInit();
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-   formKey.value.currentState!.dispose();
+
     emailController.dispose();
     passwordController.dispose();
+   super.dispose();
   }
 }
