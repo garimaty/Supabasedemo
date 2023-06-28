@@ -1,5 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+
+import '../modules/home/model/student_model.dart';
 
 
 class SupabaseServices{
@@ -38,9 +43,13 @@ class SupabaseServices{
     );
   }
 
-  fetchStudentList() async{
-   var data= await supabase.from('students').select('*');
-   return data;
+ Future<List<Student>> fetchStudentList() async{
+   final data= await supabase.from('students').select('*');
+   final list = json.decode(data);
+   print("$list-----");
+   List<Student> response = list.map((e) => Student.fromJson(e)).toList();
+   return response;
+
   }
 
 }

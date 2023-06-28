@@ -1,16 +1,17 @@
 
 import 'package:get/get.dart';
+import 'package:supabase_demo/modules/home/model/student_model.dart';
 import 'package:supabase_demo/services/supabase_services.dart';
 
 class HomePageController extends GetxController{
 
   final SupabaseServices _services = SupabaseServices();
-   RxList studentsList= [].obs;
+   //final Rx<Student> studentsList = Student().obs;
 
-   getStudentsListFromDb() async {
+  Future<List<Student>> getStudentsListFromDb() async {
      try{
-    studentsList.value = await _services.fetchStudentList();
-      print("$studentsList - list");
+      var studentsList = await _services.fetchStudentList();
+     // print("$studentsList - list");
       return studentsList;
      }catch(e){
        throw Exception(e);
