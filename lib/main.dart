@@ -24,8 +24,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       initialBinding: AuthBinding(),
-      initialRoute: RouteClass.registerScreen,
+      initialRoute: RouteClass.loginScreen,
       home: const RegisterScreen(),
       getPages: RouteClass.routes,
     );

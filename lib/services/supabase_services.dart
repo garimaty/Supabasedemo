@@ -44,7 +44,8 @@ class SupabaseServices{
   }
 
  fetchStudentList() async{
-   final data= await supabase.from('students').select('*');
+   final User? user = supabase.auth.currentUser;
+   final data= await supabase.from('students').select('*').eq('teacherUid', user?.id);
    print("$data----");
    final list = json.decode(json.encode(data));
    print("$list lll");
@@ -52,7 +53,8 @@ class SupabaseServices{
    var response = list.map((e) => Student.fromJson(e)).toList();
    print("{$response rrrr}");
    return response;
-
   }
+
+
 
 }

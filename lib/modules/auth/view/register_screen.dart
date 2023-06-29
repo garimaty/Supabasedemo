@@ -16,7 +16,15 @@ class RegisterScreen extends GetView<RegisterController> {
       Scaffold(
 
       body: Container(
-        padding: const EdgeInsets.all(12),
+        color: Colors.yellow[100],
+        // decoration:  BoxDecoration(
+        //   image: DecorationImage(
+        //     image: AssetImage("assets/images/istockphoto-1218737747-612x612.jpeg"),
+        //     fit: BoxFit.fill,
+        //
+        //   )
+     //   ),
+        padding: const EdgeInsets.all(15),
         child: Form(
           key:formKey,
           child: Column(
@@ -24,67 +32,163 @@ class RegisterScreen extends GetView<RegisterController> {
             children: [
               Padding(
                 padding: const EdgeInsets.only(bottom: 20),
-                child: TextFormField(
-                  controller: controller.usernameController,
-                  decoration: const InputDecoration(
-                    focusColor: Colors.yellow,
-                    border: OutlineInputBorder(),
-                    hintText: "Enter Your Name",
-                  ),
-                  validator: (String? value){
-                    if(value!.isEmpty){
-                      return "Enter your name";
-                    }
-                    return null;
-                  },
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top:10,bottom: 20),
-                child: TextFormField(
-                    controller: controller.emailController,
-                    decoration: const InputDecoration(
-                      focusColor: Colors.yellow,
-                      border: OutlineInputBorder(),
-                      hintText: "Enter your Email Id",
-                    ),
-                    validator: (String? value){
-                      if (value!.isEmpty || !RegExp(
-                          r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(
-                          value)) {
-                        return "Enter valid Email";
-                      } else {
-                        return null;
-                      }
-                    }
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top:10,bottom: 20),
-                child: TextFormField(
-                  controller: controller.passwordController,
-                  obscureText: true,
-                  decoration: const InputDecoration(
-                    focusColor: Colors.yellow,
-                    border: OutlineInputBorder(),
-                    hintText: "Enter Your Password",
-                  ),
-                  validator: (String? value){
-                    if(value!.isEmpty){
-                      return "Enter password";
-                    }
-                    return null;
-                  },
-                ),
-              ),
+                child: Stack(
+                  children: [
+                    Container(
 
-              ElevatedButton(onPressed: (){
-                if(formKey.currentState!.validate()){
-                      controller.register();
-                }
-              }, child:
-              const Text("Create Account"),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: Colors.white,
+                      ),
+                      child: TextFormField(
+                        controller: controller.usernameController,
+                        decoration:  const InputDecoration(
+                          hintStyle: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.orange,width: 2),
+                              borderRadius: BorderRadius.all(Radius.circular(30))
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.orange,width: 2),
+                              borderRadius: BorderRadius.all(Radius.circular(30))
+                          ),
+                          errorBorder:OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.orange,width: 2),
+                              borderRadius: BorderRadius.all(Radius.circular(30))
+                          ),
+                          hintText: "Enter Your Name",
+                        ),
+                        validator: (String? value){
+                          if(value!.isEmpty){
+                            return "Enter your name";
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               ),
+              Padding(
+                padding: const EdgeInsets.only(top:10,bottom: 20),
+                child: Stack(
+                  children: [
+                    Container(
+
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: Colors.white,
+                      ),
+                      child: TextFormField(
+
+                          controller: controller.emailController,
+                          decoration:  const InputDecoration(
+
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.orange,width: 2),
+                                borderRadius: BorderRadius.all(Radius.circular(30))
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.orange,width: 2),
+                                borderRadius: BorderRadius.all(Radius.circular(30))
+                            ),
+                            errorBorder:OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.orange,width: 2),
+                                borderRadius: BorderRadius.all(Radius.circular(30))
+                            ),
+                            hintStyle: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold
+                            ),
+                            hintText: "Enter your Email Id",
+                          ),
+                          validator: (String? value){
+                            if (value!.isEmpty || !RegExp(
+                                r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(
+                                value)) {
+                              return "Enter valid Email";
+                            } else {
+                              return null;
+                            }
+                          }
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top:10,bottom: 40),
+                child: Stack(
+                  children: [
+                    Container(
+
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: Colors.white,
+                      ),
+                      child: TextFormField(
+                        controller: controller.passwordController,
+                        obscureText: true,
+                        decoration: const InputDecoration(
+hintStyle: TextStyle(
+  color: Colors.black,
+  fontWeight: FontWeight.bold
+),
+
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.orange,width: 2),
+                              borderRadius: BorderRadius.all(Radius.circular(30))
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.orange,width: 2),
+                              borderRadius: BorderRadius.all(Radius.circular(30))
+                          ),
+                          errorBorder:OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.orange,width: 2),
+                              borderRadius: BorderRadius.all(Radius.circular(30))
+                          ),
+                          hintText: "Enter Your Password",
+
+                        ),
+                        validator: (String? value){
+                          if(value!.isEmpty){
+                            return "Enter password";
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+InkWell(
+  onTap: (){
+    if(formKey.currentState!.validate()){
+      controller.register();
+    }
+  },
+  child:   Container(
+    height: 50,
+
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(30),
+      color: Colors.orange
+    ),
+    child: const Center(
+      child: Text("Create Account",
+      style: TextStyle(
+        color: Colors.white,
+      fontWeight: FontWeight.w500,
+        fontSize: 20
+
+      ),
+      ),
+    ),
+  ),
+),
               Padding(
                 padding: const EdgeInsets.only(top: 10),
                 child: Center(
@@ -92,15 +196,17 @@ class RegisterScreen extends GetView<RegisterController> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children:  [
                       const Text("If you have account then"),
+                      const SizedBox(
+                        width: 5,
+                      ),
                       GestureDetector(
                         onTap: () async {
-
                          await  Get.toNamed(RouteClass.loginScreen);
                         },
-                        child: const Text("CLICK HERE",
+                        child: const Text("Click here",
                           style: TextStyle(
                               decoration: TextDecoration.underline,
-                              color: Colors.blue
+                              color: Colors.orange
                           ),
                         ),
                       )

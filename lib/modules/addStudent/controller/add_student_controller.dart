@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:supabase_demo/modules/home/controller/home_page_controller.dart';
 import 'package:supabase_demo/services/supabase_services.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AddStudentController extends GetxController{
 late TextEditingController nameController;
@@ -14,23 +15,22 @@ late TextEditingController idController;
 final SupabaseServices _services = SupabaseServices();
 
 addDetails() async{
-  try{
+  try {
     await _services.insertData(
-        idController.text, 
-        nameController.text, 
+        idController.text,
+        nameController.text,
         phnNoController.text,
         fNameController.text,
         addressController.text
-    ).then((value){
-
+    ).then((value) {
       Get.back();
-     Get.find<HomePageController>().getStudentsListFromDb();
+      Get.find<HomePageController>().getStudentsListFromDb();
       Get.snackbar("Congrats!!", "Student add successfully");
-
     });
-  }catch(e){
-    throw Exception(e);
+  }on PostgrestException catch(e){
+    Get.snackbar("Fail!!", e.details);
   }
+
 }
 
 @override

@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:supabase_demo/services/supabase_services.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../../route/route_class.dart';
+
 class RegisterController extends GetxController{
 
 late TextEditingController usernameController;
@@ -18,8 +20,11 @@ final SupabaseServices _services= SupabaseServices();
  register() async{
    try{
      isLoading(true);
-     var user= await _services.createUser(emailController.text, passwordController.text);
-     Get.snackbar("Congrats!!","Successfully Registered");
+     var user= await _services.createUser(emailController.text, passwordController.text).then((value){
+       Get.toNamed(RouteClass.homePage);
+       Get.snackbar("Congrats!!","Successfully Registered");
+     });
+
    } on AuthException catch (e){
      Get.snackbar(
          "Fail!!",
