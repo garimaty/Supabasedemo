@@ -7,15 +7,24 @@ class HomePageController extends GetxController{
 
   final SupabaseServices _services = SupabaseServices();
    //final Rx<Student> studentsList = Student().obs;
+  RxList getData= [].obs;
 
-  Future<List<Student>> getStudentsListFromDb() async {
-     try{
+ getStudentsListFromDb() async {
+     //try{
       var studentsList = await _services.fetchStudentList();
+
      // print("$studentsList - list");
-      return studentsList;
-     }catch(e){
-       throw Exception(e);
-     }
+      getData.value = studentsList;
+      //getData.add(studentsList);
+       return studentsList;
+      // getData.add(studentsList);
+      // print(getData);
+      // return getData;
+    // }
+     // catch(e){
+     //
+     //   throw Exception(e);
+     // }
 
    }
 

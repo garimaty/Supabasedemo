@@ -43,11 +43,14 @@ class SupabaseServices{
     );
   }
 
- Future<List<Student>> fetchStudentList() async{
+ fetchStudentList() async{
    final data= await supabase.from('students').select('*');
-   final list = json.decode(data);
-   print("$list-----");
-   List<Student> response = list.map((e) => Student.fromJson(e)).toList();
+   print("$data----");
+   final list = json.decode(json.encode(data));
+   print("$list lll");
+
+   var response = list.map((e) => Student.fromJson(e)).toList();
+   print("{$response rrrr}");
    return response;
 
   }

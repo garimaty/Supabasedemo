@@ -19,25 +19,37 @@ class Student {
   //
   // };
 
-   Student.fromJson(Map<String,dynamic> json){
-    id=json['id'];
-    name=json['name'];
-    phnNumber=json['Phone_number'];
-    fName=json["Father's_Name"];
-    address=json["Address"];
-    teacherUid=json["teacherUid"];
-  }
+factory Student.fromJson(Map<String, dynamic> json){
+  return Student(
+      id:json['id'],
+       name:json['name'],
+      phnNumber:json['Phone_number'],
+      fName:json["Father's_Name"],
+      address:json["Address"],
+       teacherUid:json["teacherUid"]
 
-  Map<String,dynamic> toJson(){
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['name'] = name;
-    data['Phone_number'] = phnNumber;
-    data["Father's_Name"]=fName;
-    data['Address']=address;
-    data['teacherUid']=teacherUid;
-    return data;
-  }
+  );
+}
+
+  //  Student.fromJson(Map<String,dynamic> json){
+  //   id=json['id'];
+  //   name=json['name'];
+  //   phnNumber=json['Phone_number'];
+  //   fName=json["Father's_Name"];
+  //   address=json["Address"];
+  //   teacherUid=json["teacherUid"];
+  // }
+  //
+  // Map<String,dynamic> toJson(){
+  //   final Map<String, dynamic> data = <String, dynamic>{};
+  //   data['id'] = id;
+  //   data['name'] = name;
+  //   data['Phone_number'] = phnNumber;
+  //   data["Father's_Name"]=fName;
+  //   data['Address']=address;
+  //   data['teacherUid']=teacherUid;
+  //   return data;
+  // }
 
 
 }

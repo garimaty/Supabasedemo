@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:supabase_demo/modules/home/controller/home_page_controller.dart';
 import 'package:supabase_demo/services/supabase_services.dart';
 
 class AddStudentController extends GetxController{
@@ -21,7 +22,9 @@ addDetails() async{
         fNameController.text,
         addressController.text
     ).then((value){
+
       Get.back();
+     Get.find<HomePageController>().getStudentsListFromDb();
       Get.snackbar("Congrats!!", "Student add successfully");
 
     });
