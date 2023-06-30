@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:supabase_demo/modules/home/controller/home_page_controller.dart';
-import 'package:supabase_demo/modules/home/model/student_model.dart';
+
 
 import '../../../route/route_class.dart';
 
@@ -11,6 +11,48 @@ class MyHomePage extends GetView<HomePageController>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+     drawer:  Drawer(
+       backgroundColor: Colors.yellow[100],
+       child: ListView(
+         padding: EdgeInsets.zero,
+         children: [
+           DrawerHeader(child: Row(
+             children: [
+               SizedBox(
+                 height: 70,
+                 child: ClipRRect(
+                     borderRadius: BorderRadius.circular(100),
+                     child: Image.asset("assets/images/images.png")),
+               ),
+const SizedBox(
+  width: 10,
+),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text("Hello!",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold
+                  ),
+                  ),
+                  Text(controller.user.value.substring(0,controller.user.value.indexOf("@")))
+                ],
+              )
+
+
+             ],
+           )),
+        ListTile(
+             title: const Text('Documents'),
+             onTap: (){
+               Get.toNamed(RouteClass.documentScreen);
+             },
+           )
+         ],
+       ),
+     ),
       backgroundColor: Colors.yellow[100],
       floatingActionButton:  FloatingActionButton(
         backgroundColor: Colors.orange,
@@ -20,6 +62,7 @@ class MyHomePage extends GetView<HomePageController>{
          child: const Icon(Icons.add)
     ),
       appBar: AppBar(
+
         backgroundColor: Colors.orange,
         title: const Text("Students Data"),
       ),

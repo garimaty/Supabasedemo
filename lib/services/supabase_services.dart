@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,7 +10,7 @@ import '../modules/home/model/student_model.dart';
 
 class SupabaseServices{
   final supabase = Supabase.instance.client;
-
+  final User? currentUser= Supabase.instance.client.auth.currentUser;
   createUser(email,password) async {
 
       final AuthResponse res = await supabase.auth.signUp(
@@ -43,6 +44,7 @@ class SupabaseServices{
     );
   }
 
+
  fetchStudentList() async{
    final User? user = supabase.auth.currentUser;
    final data= await supabase.from('students').select('*').eq('teacherUid', user?.id);
@@ -54,6 +56,20 @@ class SupabaseServices{
    print("{$response rrrr}");
    return response;
   }
+
+uploadFile(file,fileName,filePath) async {
+    try{
+      final String result = await supabase.storage.emptyBucket("${currentUser?.id}");
+      final String path = await supabase.storage.from('${currentUser?.id}').upload("public-documents",
+          file,
+          fileOptions: const FileOptions(cacheControl: '3600', upsert: false)
+      );
+      print(path);
+    }catch(e){
+      throw Exception(e);
+    }
+
+}
 
 
 

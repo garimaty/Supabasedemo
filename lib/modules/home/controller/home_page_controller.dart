@@ -8,6 +8,7 @@ class HomePageController extends GetxController{
   final SupabaseServices _services = SupabaseServices();
    //final Rx<Student> studentsList = Student().obs;
   RxList getData= [].obs;
+  var user = ''.obs;
 
  getStudentsListFromDb() async {
      //try{
@@ -15,6 +16,7 @@ class HomePageController extends GetxController{
 
      // print("$studentsList - list");
       getData.value = studentsList;
+
       //getData.add(studentsList);
        return studentsList;
       // getData.add(studentsList);
@@ -32,6 +34,8 @@ class HomePageController extends GetxController{
   void onInit() {
     // TODO: implement onInit
     getStudentsListFromDb();
+    user.value = _services.currentUser?.email??'0';
+    print(_services.currentUser);
     super.onInit();
   }
 }

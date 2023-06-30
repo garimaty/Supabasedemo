@@ -30,6 +30,13 @@ class RegisterScreen extends GetView<RegisterController> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+
+              ClipRRect(
+                  borderRadius: BorderRadius.circular(100),
+                  child: Image.asset("assets/images/images.png")),
+              const SizedBox(
+                height: 50,
+              ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 20),
                 child: Stack(
