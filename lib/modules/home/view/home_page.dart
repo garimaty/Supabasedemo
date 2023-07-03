@@ -49,6 +49,12 @@ const SizedBox(
              onTap: (){
                Get.toNamed(RouteClass.documentScreen);
              },
+           ),
+           ListTile(
+             title: const Text('Log Out'),
+             onTap: (){
+ controller.logOut();
+             },
            )
          ],
        ),

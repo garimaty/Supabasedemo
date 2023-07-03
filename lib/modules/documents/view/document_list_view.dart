@@ -21,6 +21,20 @@ class DocumentView extends GetView<DocumentController> {
         backgroundColor: Colors.orange,
         title: const Text("Documents"),
       ),
+      body:Obx(()=> ListView.separated(
+          itemCount: controller.files.length,
+          itemBuilder: (context,index){
+            print(controller.files.length);
+            return ListTile(
+              title:Text(controller.files[index]),
+            );
+          }, separatorBuilder: (BuildContext context, int index) {
+            return const Divider(
+              thickness: 1,
+              color: Colors.orange,
+            );
+      },
+      ),)
     );
   }
 }

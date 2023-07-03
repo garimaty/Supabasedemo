@@ -17,14 +17,18 @@ final SupabaseServices _services= SupabaseServices();
 
 //GlobalKey<FormState> registerFormKey = GlobalKey<FormState>(debugLabel: '_registerFormKey');
 
+
+
  register() async{
    try{
      isLoading(true);
-     var user= await _services.createUser(emailController.text, passwordController.text).then((value){
+
+     var user= await _services.createUser(emailController.text, passwordController.text).then((value)  {
        Get.toNamed(RouteClass.homePage);
        Get.snackbar("Congrats!!","Successfully Registered");
-     });
 
+     });
+    await _services.createStorageForDoc();
    } on AuthException catch (e){
      Get.snackbar(
          "Fail!!",

@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:supabase_demo/modules/home/model/student_model.dart';
 import 'package:supabase_demo/services/supabase_services.dart';
 
+import '../../../route/route_class.dart';
+
 class HomePageController extends GetxController{
 
   final SupabaseServices _services = SupabaseServices();
@@ -29,6 +31,13 @@ class HomePageController extends GetxController{
      // }
 
    }
+
+   logOut() async {
+  await _services.logout().then((value){
+     Get.offAllNamed(RouteClass.loginScreen);
+  });
+   }
+
 
    @override
   void onInit() {
