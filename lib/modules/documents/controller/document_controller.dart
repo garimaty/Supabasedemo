@@ -1,18 +1,22 @@
 
 import 'dart:io';
-import 'dart:typed_data';
+
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:supabase_demo/services/supabase_services.dart';
+import 'package:supabase_demo/widgets/defaultDialog.dart';
 
 class DocumentController extends GetxController{
 
   final SupabaseServices _services = SupabaseServices();
+  final CustomDialogs _dialog= CustomDialogs();
   FilePickerResult? result;
   File? file;
   RxList files =[].obs;
+
+
 
   addDocuments() async{
 
@@ -21,21 +25,13 @@ class DocumentController extends GetxController{
       file = File(result!.files.single.path.toString());
       var fileName =result!.files.single.name;
       var filePath = result!.files.single.path;
-      Get.defaultDialog(
-          backgroundColor: Colors.yellow[100],
-          middleText: result!.files.single.name,
-          buttonColor: Colors.orange,
-          cancelTextColor: Colors.orange,
-          confirmTextColor: Colors.white,
-          title: 'Add File ',
-          textConfirm: 'Upload File',
-          textCancel: 'Cancel',
-          onConfirm: () async {
-            print(file);
-            _services.uploadFile(file, fileName,filePath);
-
-          }
-      );
+     _dialog.alertDialogBox(
+           onConfirm: () async {
+             await _services.uploadFile(file, fileName,filePath);
+           },
+           middleText: result!.files.single.name,
+         title:  'Add File', textConfirm: 'Upload File',
+         textCancel: 'Cancel');
     }
   }
 
@@ -49,8 +45,23 @@ class DocumentController extends GetxController{
   }
 }
 
+openFile(fileName){
+   var bytes= _services.openFile(fileName);
+   return bytes;
+}
 
+deleteFile(fileName) async {
+   try{
+     await _services.deleteFile(fileName).then((value){
+       Get.back();
+       Get.snackbar(fileName, "delete Successfully");
+      // fetchDocumentsList();
 
+     });
+   }catch(e){
+     throw Exception(e);
+   }
+}
 @override
   void onInit() {
     // TODO: implement onInit

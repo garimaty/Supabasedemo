@@ -75,10 +75,10 @@ class SupabaseServices {
           fileName,
           file,
           fileOptions: const FileOptions(cacheControl: '3600', upsert: false)
-      ).then((value) {
+      ).then((value) async {
         Get.back();
         Get.snackbar("Congrats!", "Upload Successfully");
-        return Get.find<DocumentController>().fetchDocumentsList();
+        return await Get.find<DocumentController>().fetchDocumentsList();
 
       });
 
@@ -96,13 +96,38 @@ class SupabaseServices {
       final User? user = supabase.auth.currentUser;
     List list=[];
       final List<FileObject> objects = await supabase.storage.from("${user?.id}").list();
-      objects.forEach((element) async {
-        print(element.name);
-          // final Uint8List result = await supabase.storage.from("${user?.id}").download(element.name);
-           list.add(element.name);
-         // print(result);
+
+
+        objects.forEach((element) async {
+          print(element.name);
+          if(element.name!=".emptyFolderPlaceholder"){
+            list.add(element.name);
+          }
+
         });
+
+
       return list;
+  }
+
+
+  openFile(fileName) async {
+    final User? user = supabase.auth.currentUser;
+     final Uint8List result = await supabase.storage.from("${user?.id}").download(fileName);
+     return result;
+  }
+
+  deleteFile(fileName) async{
+   try{
+     final User? user = supabase.auth.currentUser;
+     final List<FileObject> objects = await supabase.storage.from("${user?.id}").remove([
+       fileName
+     ]);
+     print(objects);
+   }catch(e){
+     throw Exception(e);
+   }
+
   }
 
   logout() async{

@@ -2,9 +2,9 @@
     package="com.example.supabase_demo">
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="supabase_demo"
+        android:label="Teacher Kit"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/images">
         <activity
             android:name=".MainActivity"
             android:exported="true"

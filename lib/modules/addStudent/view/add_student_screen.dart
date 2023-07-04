@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:supabase_demo/modules/addStudent/controller/add_student_controller.dart';
-
+import 'package:supabase_demo/widgets/custom_button.dart';
+import 'package:supabase_demo/widgets/custom_textfield.dart';
 
 class AddStudent extends GetView<AddStudentController> {
   const AddStudent({Key? key}) : super(key: key);
@@ -23,195 +24,63 @@ class AddStudent extends GetView<AddStudentController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children:  [
-
                Padding(
                     padding: const EdgeInsets.only(top:20,bottom: 30),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Colors.white,
-                      ),
-                      child: TextField(
-                        controller: controller.idController,
-                        keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(
-                            hintStyle: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold
-                            ),
-
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.orange,width: 2),
-                                borderRadius: BorderRadius.all(Radius.circular(30))
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.orange,width: 2),
-                                borderRadius: BorderRadius.all(Radius.circular(30))
-                            ),
-                            errorBorder:OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.orange,width: 2),
-                                borderRadius: BorderRadius.all(Radius.circular(30))
-                            ),
-                            hintText: "Enter Id"
-                        ),
-                      ),
-                    )),
-
+                    child: CustomTextField(
+                      controller: controller.idController,
+                      hintText: 'Enter Id',
+                      isObscure: false,
+                      textInputType: TextInputType.number,
+                    )
+               ),
                  Padding(
                     padding: const EdgeInsets.only(bottom: 30),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Colors.white,
-                      ),
-                      child: TextField(
-                        controller: controller.nameController,
-                        decoration: const InputDecoration(
-                          hintStyle: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold
-                          ),
-
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.orange,width: 2),
-                              borderRadius: BorderRadius.all(Radius.circular(30))
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.orange,width: 2),
-                              borderRadius: BorderRadius.all(Radius.circular(30))
-                          ),
-                          errorBorder:OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.orange,width: 2),
-                              borderRadius: BorderRadius.all(Radius.circular(30))
-                          ),
-                          hintText: "Enter Name"
-                        ),
-
-                      ),
-                    )),
-
+                    child: CustomTextField(
+                      hintText: 'Enter Name',
+                      controller: controller.nameController,
+                      isObscure: false,
+                    )
+                 ),
                Padding(
                     padding: const EdgeInsets.only(bottom: 30),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Colors.white,
-                      ),
-                      child: TextField(
-                        controller: controller.phnNoController,
-                        keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(
-                            hintStyle: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold
-                            ),
-
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.orange,width: 2),
-                                borderRadius: BorderRadius.all(Radius.circular(30))
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.orange,width: 2),
-                                borderRadius: BorderRadius.all(Radius.circular(30))
-                            ),
-                            errorBorder:OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.orange,width: 2),
-                                borderRadius: BorderRadius.all(Radius.circular(30))
-                            ),
-                            hintText: "Enter Phone Number"
-                        ),
-                      ),
-                    )),
-
+                    child:CustomTextField(
+                      hintText: 'Enter Mobile Number',
+                      controller:controller.phnNoController,
+                      isObscure: false,
+                    textInputType: TextInputType.number,
+                    validator: (String? value){
+                    if(value?.length!=10){
+                      return "Enter valid Number ";
+                    }
+                    return null;
+                    },)),
             Padding(
                     padding: const EdgeInsets.only(bottom: 30),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Colors.white,
-                      ),
-                      child: TextField(
-                        controller: controller.fNameController,
-
-                        decoration: const InputDecoration(
-                            hintStyle: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold
-                            ),
-
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.orange,width: 2),
-                                borderRadius: BorderRadius.all(Radius.circular(30))
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.orange,width: 2),
-                                borderRadius: BorderRadius.all(Radius.circular(30))
-                            ),
-                            errorBorder:OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.orange,width: 2),
-                                borderRadius: BorderRadius.all(Radius.circular(30))
-                            ),
-                            hintText: "Enter Father's Name"
-                        ),
-                      ),
-                    )),
-
+                    child: CustomTextField(
+                      controller: controller.fNameController,
+                      hintText: "Enter Father's Name",
+                      isObscure: true,
+                    )
+            ),
                  Padding(
                     padding: const EdgeInsets.only(bottom: 30),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Colors.white,
-                      ),
-                      child: TextField(
-                        controller: controller.addressController,
-                        decoration: const InputDecoration(
-                            hintStyle: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold
-                            ),
-
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.orange,width: 2),
-                                borderRadius: BorderRadius.all(Radius.circular(30))
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.orange,width: 2),
-                                borderRadius: BorderRadius.all(Radius.circular(30))
-                            ),
-                            errorBorder:OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.orange,width: 2),
-                                borderRadius: BorderRadius.all(Radius.circular(30))
-                            ),
-                            hintText: "Enter Address"
-                        ),
-                      ),
-                    )),
-                InkWell(
-                  onTap: (){
-                    if(formKey.currentState!.validate()){
-                      controller.addDetails();
-                    }
-                  },
-                  child:   Container(
-                    height: 50,
-
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Colors.orange
-                    ),
-                    child: const Center(
-                      child: Text("Save",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 20
-
-                        ),
-                      ),
-                    ),
-                  ),
+                    child: CustomTextField(
+                      controller: controller.addressController,
+                      hintText: 'Enter Address',
+                      isObscure: false,
+                    )
+                 ),
+              SizedBox(
+                height: 50,
+                child: CustomButton(
+                    onPressed: (){
+                      if(formKey.currentState!.validate()){
+                        controller.addDetails();
+                      }
+                    },
+                    content: "Save"
                 ),
+              )
      ],
             ),
           ),
