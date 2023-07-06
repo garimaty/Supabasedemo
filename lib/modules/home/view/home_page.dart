@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:supabase_demo/modules/home/controller/home_page_controller.dart';
+import 'package:supabase_demo/modules/home/view/search.dart';
 import '../../../route/route_class.dart';
 
 class MyHomePage extends GetView<HomePageController>{
@@ -64,42 +65,55 @@ const SizedBox(
          child: const Icon(Icons.add)
     ),
       appBar: AppBar(
-
         backgroundColor: Colors.orange,
         title: const Text("Students Data"),
+        actions: [
+          IconButton(onPressed: (){
+
+            showSearch(
+                context: context,
+                delegate: CustomSearchDelegate()
+            );
+          }, icon: const Icon(Icons.search))
+        ],
       ),
       body:
-      Container(
-             padding: const EdgeInsets.all(15),
+      SingleChildScrollView(
 
-           child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width/0.6,
-                  child:
-                   Obx(()=>DataTable(
-                       border: TableBorder.all(color: Colors.orange),
+        child: Container(
 
-                       columns: const [
-                         DataColumn(label: Text("Id")),
-                         DataColumn(label: Text("Name")),
-                         DataColumn(label: Text("PhnNo")),
-                         DataColumn(label: Text("FName")),
-                         DataColumn(label: Text("Address"))
-                       ],
-                       rows: List<DataRow>.generate(controller.getData.length, (index) =>DataRow(cells: [
-                         DataCell(Text("${controller.getData![index].id}")),
-                         DataCell(Text("${controller.getData![index].name}")),
-                         DataCell(Text("${controller.getData![index].phnNumber}")),
-                         DataCell(Text("${controller.getData![index].fName}")),
-                         DataCell(Text("${controller.getData![index].address}"))
-                       ]))
-                   ),)
+               padding: const EdgeInsets.all(15),
+
+             child: SingleChildScrollView(
+
+                  scrollDirection: Axis.horizontal,
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width/0.6,
+                    child:
+                     Obx(()=>DataTable(
+                         border: TableBorder.all(color: Colors.orange),
+
+                         columns: const [
+                           DataColumn(label: Text("Id")),
+                           DataColumn(label: Text("Name")),
+                           DataColumn(label: Text("PhnNo")),
+                           DataColumn(label: Text("FName")),
+                           DataColumn(label: Text("Address"))
+                         ],
+                         rows: List<DataRow>.generate(controller.getData.length, (index) =>DataRow(cells: [
+                           DataCell(Text("${controller.getData![index].id}")),
+                           DataCell(Text("${controller.getData![index].name}")),
+                           DataCell(Text("${controller.getData![index].phnNumber}")),
+                           DataCell(Text("${controller.getData![index].fName}")),
+                           DataCell(Text("${controller.getData![index].address}"))
+                         ]))
+                     ),)
+                  ),
                 ),
-              ),
 
 
-        ),
+          ),
+      ),
 
     );
   }

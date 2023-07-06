@@ -10,6 +10,7 @@ class HomePageController extends GetxController{
   final SupabaseServices _services = SupabaseServices();
    //final Rx<Student> studentsList = Student().obs;
   RxList getData= [].obs;
+  RxList searchDataList=[].obs;
   var user = ''.obs;
 
  getStudentsListFromDb() async {
@@ -32,6 +33,19 @@ class HomePageController extends GetxController{
 
    }
 
+  searchData(query) async{
+   try{
+  var list = await _services.searchQuery(query);
+  searchDataList.value= list;
+
+    print("${list}--searchData");
+
+
+   }catch(e){
+     throw Exception(e);
+   }
+   }
+
    logOut() async {
   await _services.logout().then((value){
      Get.offAllNamed(RouteClass.loginScreen);
@@ -43,6 +57,7 @@ class HomePageController extends GetxController{
   void onInit() {
     // TODO: implement onInit
     getStudentsListFromDb();
+
     user.value = _services.currentUser?.email??'0';
     print(_services.currentUser);
     super.onInit();

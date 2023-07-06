@@ -59,7 +59,7 @@ class AddStudent extends GetView<AddStudentController> {
                     child: CustomTextField(
                       controller: controller.fNameController,
                       hintText: "Enter Father's Name",
-                      isObscure: true,
+                      isObscure: false,
                     )
             ),
                  Padding(

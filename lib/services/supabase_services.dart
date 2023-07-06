@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:supabase_demo/modules/documents/controller/document_controller.dart';
@@ -50,7 +51,7 @@ class SupabaseServices {
   fetchStudentList() async {
     final User? user = supabase.auth.currentUser;
     final data = await supabase.from('students').select('*').eq(
-        'teacherUid', user?.id);
+        'teacherUid', user?.id).order('id',ascending: true);
     print("$data----");
     final list = json.decode(json.encode(data));
     print("$list lll");
@@ -60,6 +61,15 @@ class SupabaseServices {
     return response;
   }
 
+   searchQuery(query) async{
+    final User? user = supabase.auth.currentUser;
+    final data = await supabase.from('students').select('*').eq(
+        'teacherUid', user?.id).eq('name',query);
+    final list = json.decode(json.encode(data));
+    var response = list.map((e) => Student.fromJson(e)).toList();
+    return response;
+    print("${data}-searchdata");
+  }
   createStorageForDoc() async {
     final User? user = supabase.auth.currentUser;
     print("${user?.id}--");
@@ -81,8 +91,6 @@ class SupabaseServices {
         return await Get.find<DocumentController>().fetchDocumentsList();
 
       });
-
-
       print(path);
     } on StorageException catch (e)  {
       Get.back();
@@ -90,6 +98,8 @@ class SupabaseServices {
       print(e.message);
     }
   }
+
+
 
   fetchListOfFiles() async{
 
@@ -142,7 +152,7 @@ class SupabaseServices {
 
   signInUsingGoogle()async{
    final auth = await supabase.auth.signInWithOAuth(Provider.google,
-     redirectTo: "https://fizjwokqklyzoaezoxbf.supabase.co"
+     redirectTo: kIsWeb ? null : 'io.supabase.flutter://login-callback',
    );
    return auth;
   }
