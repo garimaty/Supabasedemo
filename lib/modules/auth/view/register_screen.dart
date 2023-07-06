@@ -96,6 +96,7 @@ SizedBox(
       content:"Create Your Account"
   ),
 ),
+
                   Padding(
                     padding: const EdgeInsets.only(top: 10),
                     child: Center(
@@ -116,6 +117,7 @@ SizedBox(
                                   color: Colors.orange
                               ),
                             ),
+
                           )
                         ],
                       ),

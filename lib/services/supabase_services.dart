@@ -134,6 +134,19 @@ class SupabaseServices {
     await supabase.auth.signOut();
   }
 
+
+  signInUsingAppleId() async {
+    final authResponse = await supabase.auth.signInWithApple();
+    return authResponse;
+  }
+
+  signInUsingGoogle()async{
+   final auth = await supabase.auth.signInWithOAuth(Provider.google,
+     redirectTo: "https://fizjwokqklyzoaezoxbf.supabase.co"
+   );
+   return auth;
+  }
+
 }
 
 

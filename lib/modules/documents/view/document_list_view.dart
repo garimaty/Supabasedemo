@@ -37,26 +37,7 @@ class DocumentView extends GetView<DocumentController> {
                Get.to(()=>const FileViewer(),arguments: [file,data[1]]);
               },
               title:Text(controller.files[index]),
-              trailing: IconButton(
-                onPressed: (){
-                  print('object');
-                  Get.defaultDialog(
-                    backgroundColor: Colors.yellow[100],
-                    title: 'Alert!!!!',
-                    middleText: "Are you sure to delete this file?",
-                   textConfirm: "yes",
-                      textCancel: "NO",
-                    cancelTextColor: Colors.orange,
-                    confirmTextColor: Colors.white,
-                    buttonColor: Colors.orange,
-                    onConfirm: (){
-                      print("delete-${controller.files[index]}");
-                      controller.deleteFile(controller.files[index]);
-                    }
-                  );
-                },
-                icon: const Icon(Icons.delete),
-              )
+
             );
           }, separatorBuilder: (BuildContext context, int index) {
             return const Divider(

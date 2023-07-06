@@ -72,12 +72,68 @@ class LoginScreen extends GetView<LoginController> {
                           onPressed: (){
                             if(formKey.currentState!.validate()){
                               controller.login();
+
                             }
                           } ,
                           content: "Login"
                       ),
                     ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      const Text("OR",
+                        style: TextStyle(
+                            color: Colors.orange,
+                            fontWeight: FontWeight.bold
+                        ),
+                      ),
+                      const Text("Continue with Google or Apple"),
+                      const SizedBox(
+                        height: 5,
+                      ),
 
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(100),
+                                border: Border.all(color: Colors.orange)
+                            ),
+                            child: IconButton(
+                              padding: EdgeInsets.zero,
+                              onPressed: () {
+                                controller.signInWithGoogle();
+                              },
+                              icon: const Icon(Icons.g_mobiledata,
+                                color: Colors.black,
+                                size: 35,
+                              ),
+
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(100),
+                                border: Border.all(color: Colors.orange)
+                            ),
+                            child: IconButton(
+                              padding: EdgeInsets.zero,
+                              onPressed: () {  },
+                              icon: const Icon(Icons.apple,
+                                color: Colors.black,
+                                size: 35,
+                              ),
+
+                            ),
+                          ),
+                        ],
+                      ),
                       Padding(
                         padding: const EdgeInsets.only(top: 10),
                         child: Center(

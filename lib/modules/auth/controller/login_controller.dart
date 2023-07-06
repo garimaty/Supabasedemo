@@ -32,8 +32,15 @@ class LoginController extends GetxController{
     print(loginUser);
   }on AuthException catch(e){
     Get.snackbar("Fail", e.message);
-  }
+  }}
 
+
+  signInWithGoogle() async {
+    try{
+      await _services.signInUsingGoogle();
+    }catch(e){
+      throw Exception(e);
+    }
   }
 
   @override
