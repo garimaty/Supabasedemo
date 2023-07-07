@@ -19,4 +19,8 @@ class CustomDialogs{
         onConfirm: onConfirm
     );
   }
+
+  customSnackBar(title,message) {
+    return Get.snackbar(title, message);
+  }
 }

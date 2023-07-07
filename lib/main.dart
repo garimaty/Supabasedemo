@@ -12,7 +12,8 @@ Future<void> main() async {
 
   await Supabase.initialize(
       url: 'https://fizjwokqklyzoaezoxbf.supabase.co',
-      anonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZpemp3b2txa2x5em9hZXpveGJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODc3NjE4ODMsImV4cCI6MjAwMzMzNzg4M30.0sNFEKMkLRM-FJF_3Q8ke0XW76bTb1yP48K9KWBBaDU"
+      anonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZpemp3b2txa2x5em9hZXpveGJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODc3NjE4ODMsImV4cCI6MjAwMzMzNzg4M30.0sNFEKMkLRM-FJF_3Q8ke0XW76bTb1yP48K9KWBBaDU",
+      authFlowType: AuthFlowType.pkce,
   );
 
    runApp(const MyApp());

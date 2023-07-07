@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:supabase_demo/services/supabase_services.dart';
+import 'package:supabase_demo/widgets/defaultDialog.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../route/route_class.dart';
@@ -15,6 +16,7 @@ class LoginController extends GetxController{
   late TextEditingController emailController;
   late TextEditingController passwordController;
    final RxString uid= ''.obs;
+   final CustomDialogs _dialogs = CustomDialogs();
 
   login() async{
   try{
@@ -22,22 +24,22 @@ class LoginController extends GetxController{
         emailController.text,
         passwordController.text
     ).then((value){
-
-      Get.snackbar("Congrats!!",
-          "Successfully Login"
-      );
+      _dialogs.customSnackBar("Congrats!!", "Successfully Login");
        Get.toNamed(RouteClass.homePage);
     });
 
     print(loginUser);
   }on AuthException catch(e){
-    Get.snackbar("Fail", e.message);
+
+    _dialogs.customSnackBar("Fail", e.message);
+
   }}
 
 
   signInWithGoogle() async {
     try{
-      await _services.signInUsingGoogle();
+      var response = await _services.signInUsingGoogle();
+
     }catch(e){
       throw Exception(e);
     }

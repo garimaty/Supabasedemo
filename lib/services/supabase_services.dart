@@ -10,6 +10,7 @@ import 'package:supabase_demo/modules/home/controller/home_page_controller.dart'
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../modules/home/model/student_model.dart';
+import '../route/route_class.dart';
 
 
 class SupabaseServices {
@@ -152,8 +153,14 @@ class SupabaseServices {
 
   signInUsingGoogle()async{
    final auth = await supabase.auth.signInWithOAuth(Provider.google,
-     redirectTo: kIsWeb ? null : 'io.supabase.flutter://login-callback',
-   );
+   redirectTo: kIsWeb ? null : 'io.supabase.flutterquickstart://login-callback/',
+     authScreenLaunchMode: LaunchMode.inAppWebView,
+       scopes: 'repo gist notifications'
+   ).then((value){
+     final Session? session = supabase.auth.currentSession;
+     final String? oAuthToken = session?.providerToken;
+   });
+   ;print("${auth}---google");
    return auth;
   }
 

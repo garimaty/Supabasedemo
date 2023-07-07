@@ -6,6 +6,8 @@ import 'package:supabase_demo/modules/home/controller/home_page_controller.dart'
 import 'package:supabase_demo/services/supabase_services.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../../widgets/defaultDialog.dart';
+
 class AddStudentController extends GetxController{
 late TextEditingController nameController;
 late TextEditingController phnNoController;
@@ -13,6 +15,7 @@ late TextEditingController fNameController;
 late TextEditingController addressController;
 late TextEditingController idController;
 final SupabaseServices _services = SupabaseServices();
+final  CustomDialogs _dialogs= CustomDialogs();
 
 addDetails() async{
   try {
@@ -25,10 +28,11 @@ addDetails() async{
     ).then((value) {
       Get.back();
       Get.find<HomePageController>().getStudentsListFromDb();
-      Get.snackbar("Congrats!!", "Student add successfully");
+      _dialogs.customSnackBar("Congrats!!", "Student add successfully");
     });
   }on PostgrestException catch(e){
     Get.snackbar("Fail!!", e.details);
+    _dialogs.customSnackBar("Fail!!", e.details);
   }
 
 }

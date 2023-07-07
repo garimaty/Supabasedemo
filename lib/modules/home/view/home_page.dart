@@ -50,7 +50,7 @@ const SizedBox(
            ListTile(
              title: const Text('Log Out'),
              onTap: (){
- controller.logOut();
+         controller.logOut();
              },
            )
          ],
@@ -90,7 +90,7 @@ const SizedBox(
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width/0.6,
                     child:
-                     Obx(()=>DataTable(
+                     Obx(()=>controller.getData.value != null?DataTable(
                          border: TableBorder.all(color: Colors.orange),
 
                          columns: const [
@@ -107,6 +107,8 @@ const SizedBox(
                            DataCell(Text("${controller.getData![index].fName}")),
                            DataCell(Text("${controller.getData![index].address}"))
                          ]))
+                     ):const Center(
+                       child: Text("There is no student data present "),
                      ),)
                   ),
                 ),

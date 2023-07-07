@@ -54,7 +54,7 @@ deleteFile(fileName) async {
    try{
      await _services.deleteFile(fileName).then((value){
        Get.back();
-       Get.snackbar(fileName, "delete Successfully");
+       _dialog.customSnackBar(fileName, "delete Successfully");
       // fetchDocumentsList();
 
      });
